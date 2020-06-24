@@ -1,5 +1,4 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
@@ -7,6 +6,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { useToken } from "./hooks/session";
 
 import LocationInfo from "./pages/LocationInfo";
+import Forecast from "./pages/Forecast";
 import LoginPage from "./pages/LoginPage";
 
 const { Navigator, Screen } = createDrawerNavigator();
@@ -21,7 +21,12 @@ const AppWrapper: React.FC<Props> = (props) => {
   return token ? (
     <NavigationContainer>
       <Navigator initialRouteName={"LocationInfo"}>
-        <Screen name="LocationInfo" component={LocationInfo} />
+        <Screen
+          name="LocationInfo"
+          component={LocationInfo}
+          initialParams={{ token: token }}
+        />
+        <Screen name="Forecast" component={Forecast} />
       </Navigator>
     </NavigationContainer>
   ) : (
